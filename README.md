@@ -84,10 +84,13 @@ curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/inge
 
 ## Deploying
 
-1. Create the Vercel project and add the Neon integration.
-2. Set `DATABASE_URL`, `ANTHROPIC_API_KEY` and `CRON_SECRET`.
-3. Apply `db/schema.sql` to the Neon database.
-4. Deploy. `vercel.json` registers the daily cron; confirm the first run in the logs.
+Step-by-step runbook: [`DEPLOY.md`](./DEPLOY.md). In short — import the repo to Vercel,
+attach Neon, apply `db/schema.sql`, set `ANTHROPIC_API_KEY` and `CRON_SECRET`, redeploy,
+then trigger the first ingest by hand to check its output.
+
+Two things that bite: the app lives on a feature branch, so set Vercel's production
+branch accordingly; and never apply `db/seed.sql` to production — it is invented
+fixture data, and a public site showing an invented recall reads as a real one.
 
 ## Scope
 
