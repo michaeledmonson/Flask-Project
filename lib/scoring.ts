@@ -126,7 +126,7 @@ export function tierRank(tier: Tier): number {
 
 /** Raw R → tier, before the trust cap. */
 export function rawTier(r: number): Tier {
-  if (r >= 0.6) return "very-high";
+  if (r >= 0.7) return "very-high";
   if (r >= 0.4) return "high";
   if (r >= 0.2) return "moderate";
   if (r >= 0.07) return "low";
@@ -149,7 +149,7 @@ export function tierFor(r: number, confidences: readonly number[]): Tier {
 /** One outbreak's contribution to an aggregate, with §7's chain weighting. */
 export interface WeightedOutbreak {
   outbreak: ScorableOutbreak;
-  /** 1 direct · 0.8 supplier match · 0.5 ingredient exposure. */
+  /** 1 direct · 0.8 supplier match · 0.3 ingredient exposure. */
   weight?: number;
 }
 

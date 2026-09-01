@@ -149,8 +149,8 @@ test("concurrent outbreaks compound rather than the worst one winning", () => {
 // ── tier mapping ─────────────────────────────────────────────────────────────
 
 test("tier boundaries match the published table", () => {
-  assert.equal(rawTier(0.6), "very-high");
-  assert.equal(rawTier(0.59), "high");
+  assert.equal(rawTier(0.7), "very-high");
+  assert.equal(rawTier(0.69), "high");
   assert.equal(rawTier(0.4), "high");
   assert.equal(rawTier(0.39), "moderate");
   assert.equal(rawTier(0.2), "moderate");
@@ -190,7 +190,7 @@ test("the cap applies end to end: a rumor-only food stays at Moderate", () => {
     }),
   }));
   const risk = aggregateRisk(rumors, NOW);
-  assert.ok(risk.r > 0.6, "raw R clears the Very High threshold");
+  assert.ok(risk.r > 0.7, "raw R clears the Very High threshold");
   assert.equal(risk.tier, "moderate", "but weak sourcing caps it");
 });
 
@@ -272,11 +272,11 @@ test("chain weights scale a contribution without changing its confidence", () =>
 
   const direct = aggregateRisk([{ outbreak: o, weight: 1 }], NOW);
   const supplier = aggregateRisk([{ outbreak: o, weight: 0.8 }], NOW);
-  const ingredient = aggregateRisk([{ outbreak: o, weight: 0.5 }], NOW);
+  const ingredient = aggregateRisk([{ outbreak: o, weight: 0.3 }], NOW);
 
   assert.equal(direct.r, 1);
   assert.ok(Math.abs(supplier.r - 0.8) < 1e-9);
-  assert.ok(Math.abs(ingredient.r - 0.5) < 1e-9);
+  assert.ok(Math.abs(ingredient.r - 0.3) < 1e-9);
   assert.equal(supplier.tier, "very-high");
-  assert.equal(ingredient.tier, "high");
+  assert.equal(ingredient.tier, "moderate");
 });

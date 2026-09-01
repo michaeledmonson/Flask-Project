@@ -87,4 +87,16 @@ export interface ListItem {
    * the marker on nearly every row.
    */
   namedInState: boolean;
+  /**
+   * Best (lowest-numbered) source tier across the active outbreaks, or null when
+   * nothing is active. Drives the Official / News / Unverified row tag, so a rating
+   * carrying no official confirmation says so on the list itself.
+   */
+  sourceTier: SourceTier | null;
+  /**
+   * Chains only: how the strongest signal reached this chain. Shown on the row so a
+   * High rating driven purely by ingredient exposure does not read as an accusation
+   * against the business.
+   */
+  topSignal: "direct" | "supplier" | "ingredient" | null;
 }

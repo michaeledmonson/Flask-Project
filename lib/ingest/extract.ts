@@ -8,7 +8,7 @@ import { CHAINS, FOODS } from "../config.ts";
 import type { Severity } from "../types.ts";
 import type { FeedItem } from "./feeds.ts";
 
-export const MODEL = "claude-haiku-4-5-20251001";
+export const MODEL = "claude-haiku-4-5";
 export const BATCH_SIZE = 10;
 
 const PATHOGENS = [

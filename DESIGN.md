@@ -220,7 +220,7 @@ R = 1 − Π (1 − Sᵢ)   over active outbreaks for that food
 
 | R | Tier | Color token |
 |---|---|---|
-| ≥ 0.60 | Very High | red |
+| ≥ 0.70 | Very High | red |
 | ≥ 0.40 | High | orange |
 | ≥ 0.20 | Moderate | amber |
 | ≥ 0.07 | Low | yellow-green |
@@ -262,7 +262,7 @@ formula:
    chain.
 2. **Supplier matches** (weight ×0.8): outbreaks where a `brands` entry matches a listed
    supplier (case-insensitive substring both directions).
-3. **Ingredient exposure** (weight ×0.5): active outbreaks on the chain's
+3. **Ingredient exposure** (weight ×0.3): active outbreaks on the chain's
    `key_ingredients` foods.
 
 `R_chain = 1 − Π(1 − wᵢSᵢ)`, same tier mapping and trust cap. The chain detail page

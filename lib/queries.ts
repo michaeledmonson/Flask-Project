@@ -16,6 +16,7 @@ import type {
   OutbreakWithReports,
   ReportRow,
   ScoredOutbreak,
+  SourceTier,
   Tier,
   Trend,
 } from "./types.ts";
@@ -23,7 +24,7 @@ import type {
 /** §7 signal weights. */
 export const WEIGHT_DIRECT = 1;
 export const WEIGHT_SUPPLIER = 0.8;
-export const WEIGHT_INGREDIENT = 0.5;
+export const WEIGHT_INGREDIENT = 0.3;
 
 export type ChainSignal = "direct" | "supplier" | "ingredient";
 
@@ -138,6 +139,22 @@ export async function getFoodList(
   return buildFoodList(outbreaks, filters, asOf);
 }
 
+/**
+ * Best (lowest-numbered) source tier backing a set of outbreaks — 1 official, 2
+ * established outlet, 3 unverified. Null when nothing is active.
+ */
+function bestSourceTier(
+  outbreaks: readonly { reports: readonly ReportRow[] }[],
+): SourceTier | null {
+  let best: SourceTier | null = null;
+  for (const o of outbreaks) {
+    for (const r of o.reports) {
+      if (best === null || r.source_tier < best) best = r.source_tier;
+    }
+  }
+  return best;
+}
+
 export function buildFoodList(
   outbreaks: readonly OutbreakWithReports[],
   filters: FoodListFilters = {},
@@ -190,6 +207,8 @@ export function buildFoodList(
         latestHeadline: latestHeadlineOf(active, state),
         relevantToState: active.some((o) => relevantTo(o, state)),
         namedInState: active.some((o) => namedIn(o, state)),
+        sourceTier: bestSourceTier(active),
+        topSignal: null,
       },
     });
   }
@@ -360,6 +379,8 @@ export function buildChainList(
         latestHeadline: latestHeadlineOf(evidence.map((e) => e.outbreak), state),
         relevantToState: evidence.some((e) => relevantTo(e.outbreak, state)),
         namedInState: evidence.some((e) => namedIn(e.outbreak, state)),
+        sourceTier: bestSourceTier(evidence.map((e) => e.outbreak)),
+        topSignal: evidence[0]?.signal ?? null,
       },
     });
   }

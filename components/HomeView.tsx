@@ -21,6 +21,46 @@ type Tab = "groceries" | "restaurants";
 
 const FOODS_BY_SLUG = new Map(FOODS.map((f) => [f.slug, f]));
 
+const SOURCE_LABELS: Record<number, string> = {
+  1: "Official",
+  2: "News",
+  3: "Unverified",
+};
+
+const SIGNAL_LABELS: Record<string, string> = {
+  direct: "Named",
+  supplier: "Supplier",
+  ingredient: "Ingredient",
+};
+
+/**
+ * The small uppercase row tag. On groceries it names the strongest source backing the
+ * rating; on restaurants it names how the signal reached the chain, so an elevated
+ * rating driven by ingredient exposure cannot be misread as an accusation.
+ */
+function RowTag({ item }: { item: ListItem }) {
+  const label =
+    item.topSignal !== null
+      ? SIGNAL_LABELS[item.topSignal]
+      : item.sourceTier !== null
+        ? SOURCE_LABELS[item.sourceTier]
+        : null;
+  if (!label) return null;
+
+  const official = item.topSignal === null && item.sourceTier === 1;
+  return (
+    <span
+      className={`shrink-0 rounded border px-1 py-px text-[9px] font-semibold uppercase tracking-wider ${
+        official
+          ? "border-sky-300 bg-sky-50 text-sky-800"
+          : "border-stone-300 bg-white text-stone-500"
+      }`}
+    >
+      {label}
+    </span>
+  );
+}
+
 /**
  * Home (DESIGN.md §9.1). The server renders the default state so the list is there on
  * first paint; search and category filtering run locally, and only a state change —
@@ -229,6 +269,11 @@ export default function HomeView({
                         </span>
                       )}
                     </p>
+                  )}
+                  {(item.sourceTier !== null || item.topSignal !== null) && (
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <RowTag item={item} />
+                    </div>
                   )}
                 </div>
                 <TierBadge tier={item.tier} />

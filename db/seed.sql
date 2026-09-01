@@ -4,7 +4,13 @@
 --
 --   psql "$DATABASE_URL" -f db/schema.sql -f db/seed.sql
 --
--- Re-runnable: it clears both tables first. Never run this against production data.
+-- Re-runnable: it clears both tables first. NEVER run this against production data.
+--
+-- Every outbreak, brand, publisher and URL below is invented, and the URLs point at
+-- non-resolving .example domains on purpose. No fabricated claim here is attached to a
+-- real company, publication or agency — keep it that way if you edit this file, because
+-- a public deployment showing an invented recall against a real business is a real
+-- problem. Production starts empty and fills from the first ingest run.
 
 TRUNCATE reports, outbreaks RESTART IDENTITY CASCADE;
 
@@ -28,9 +34,9 @@ VALUES
 
   -- Named chain + a supplier brand: exercises all three §7 chain signals.
   ('romaine-lettuce', 'e-coli',
-   'E. coli — romaine lettuce linked to Taylor Farms product',
-   'Health officials are investigating E. coli illnesses in three western states connected to romaine lettuce; reporting has named servings at Chipotle locations among the exposures.',
-   ARRAY['Taylor Farms'], ARRAY['CA', 'OR', 'WA'], 2, ARRAY['chipotle'],
+   'E. coli — romaine lettuce linked to Cascade Field Growers',
+   'Health officials are investigating E. coli illnesses in three western states connected to romaine lettuce from a single grower; restaurant and retail distribution is still being traced.',
+   ARRAY['Cascade Field Growers'], ARRAY['CA', 'OR', 'WA'], 2, ARRAY[]::text[],
    now() - interval '19 days', now() - interval '12 days'),
 
   -- Regionally relevant to the default state (NY).
@@ -78,58 +84,58 @@ SELECT o.id, v.url, v.source_name, v.source_tier, v.headline, v.published_at
 FROM (VALUES
   -- eggs: official + corroborating trade press, with a follow-up this week
   ('Salmonella — Country Eggs brand shell eggs',
-   'https://www.fda.gov/safety/recalls/country-eggs-salmonella-2026',
-   'FDA', 1, 'Country Eggs LLC recalls shell eggs due to salmonella contamination',
+   'https://recall-notice.example/safety/recalls/country-eggs-salmonella-2026',
+   'Federal recall notice', 1, 'Country Eggs LLC recalls shell eggs due to salmonella contamination',
    now() - interval '11 days'),
   ('Salmonella — Country Eggs brand shell eggs',
-   'https://www.cdc.gov/salmonella/country-eggs-08-26/index.html',
-   'CDC', 1, 'Salmonella outbreak linked to shell eggs: 42 cases across 12 states',
+   'https://health-advisory.example/salmonella/country-eggs-08-26/index.html',
+   'Federal health advisory', 1, 'Salmonella outbreak linked to shell eggs: 42 cases across 12 states',
    now() - interval '5 days'),
   ('Salmonella — Country Eggs brand shell eggs',
-   'https://www.foodsafetynews.com/2026/08/egg-recall-expands-hospitalizations/',
-   'Food Safety News', 2, 'Egg recall expands as hospitalizations climb',
+   'https://foodsafetywire.example/2026/08/egg-recall-expands-hospitalizations/',
+   'Food Safety Wire', 2, 'Egg recall expands as hospitalizations climb',
    now() - interval '2 days'),
 
   -- deli meat: official + national outlet
   ('Listeria — sliced deli meats from Harborview Provisions',
-   'https://www.cdc.gov/listeria/outbreaks/deli-meat-08-26/index.html',
-   'CDC', 1, 'Listeria outbreak linked to meats sliced at deli counters',
+   'https://health-advisory.example/listeria/outbreaks/deli-meat-08-26/index.html',
+   'Federal health advisory', 1, 'Listeria outbreak linked to meats sliced at deli counters',
    now() - interval '24 days'),
   ('Listeria — sliced deli meats from Harborview Provisions',
-   'https://www.npr.org/2026/08/deli-meat-listeria-recall',
-   'NPR Health', 2, 'Deli meat recall widens amid listeria investigation',
+   'https://nationalnewsdesk.example/2026/08/deli-meat-listeria-recall',
+   'National News Desk', 2, 'Deli meat recall widens amid listeria investigation',
    now() - interval '6 days'),
 
   -- romaine: two independent outlets, no official notice
-  ('E. coli — romaine lettuce linked to Taylor Farms product',
-   'https://www.foodsafetynews.com/2026/08/romaine-e-coli-western-states/',
-   'Food Safety News', 2, 'E. coli illnesses in three western states point to romaine',
+  ('E. coli — romaine lettuce linked to Cascade Field Growers',
+   'https://foodsafetywire.example/2026/08/romaine-e-coli-western-states/',
+   'Food Safety Wire', 2, 'E. coli illnesses in three western states point to romaine',
    now() - interval '19 days'),
-  ('E. coli — romaine lettuce linked to Taylor Farms product',
-   'https://foodpoisoningbulletin.com/2026/romaine-e-coli-chipotle-servings/',
-   'Food Poisoning Bulletin', 2, 'Investigators look at romaine served at Chipotle locations',
+  ('E. coli — romaine lettuce linked to Cascade Field Growers',
+   'https://foodborne-digest.example/2026/romaine-e-coli-western-states/',
+   'Foodborne Illness Digest', 2, 'Investigators trace romaine E. coli cluster to a single grower',
    now() - interval '12 days'),
 
   -- bagged salad: single established outlet
   ('Cyclospora — bagged salad kits in the Northeast',
-   'https://www.foodsafetynews.com/2026/08/cyclospora-salad-kits-northeast/',
-   'Food Safety News', 2, 'Cyclospora cluster tied to Northeast salad kits',
+   'https://foodsafetywire.example/2026/08/cyclospora-salad-kits-northeast/',
+   'Food Safety Wire', 2, 'Cyclospora cluster tied to Northeast salad kits',
    now() - interval '28 days'),
   ('Cyclospora — bagged salad kits in the Northeast',
-   'https://www.foodsafetynews.com/2026/08/cyclospora-salad-kits-update/',
-   'Food Safety News', 2, 'Cyclospora case count rises to 31 in salad kit cluster',
+   'https://foodsafetywire.example/2026/08/cyclospora-salad-kits-update/',
+   'Food Safety Wire', 2, 'Cyclospora case count rises to 31 in salad kit cluster',
    now() - interval '20 days'),
 
   -- cucumbers: official recall
   ('Salmonella — whole cucumbers from Del Sol Produce',
-   'https://www.fda.gov/safety/recalls/del-sol-cucumbers-salmonella-2026',
-   'FDA', 1, 'Del Sol Produce recalls whole cucumbers over salmonella',
+   'https://recall-notice.example/safety/recalls/del-sol-cucumbers-salmonella-2026',
+   'Federal recall notice', 1, 'Del Sol Produce recalls whole cucumbers over salmonella',
    now() - interval '31 days'),
 
   -- ice cream: official, recall only
   ('Listeria — Northfield Creamery ice cream recall',
-   'https://www.fda.gov/safety/recalls/northfield-creamery-listeria-2026',
-   'FDA', 1, 'Northfield Creamery recalls ice cream pints after listeria finding',
+   'https://recall-notice.example/safety/recalls/northfield-creamery-listeria-2026',
+   'Federal recall notice', 1, 'Northfield Creamery recalls ice cream pints after listeria finding',
    now() - interval '9 days'),
 
   -- flour: a single unverified local report
@@ -140,8 +146,8 @@ FROM (VALUES
 
   -- oysters: established outlet + a smaller one
   ('Norovirus — raw oysters harvested in the Pacific Northwest',
-   'https://www.foodsafetynews.com/2026/08/norovirus-oysters-pacific-northwest/',
-   'Food Safety News', 2, 'Norovirus illnesses prompt Pacific Northwest oyster closures',
+   'https://foodsafetywire.example/2026/08/norovirus-oysters-pacific-northwest/',
+   'Food Safety Wire', 2, 'Norovirus illnesses prompt Pacific Northwest oyster closures',
    now() - interval '18 days'),
   ('Norovirus — raw oysters harvested in the Pacific Northwest',
    'https://www.coastwatchdaily.example/oyster-harvest-closures',
@@ -150,12 +156,12 @@ FROM (VALUES
 
   -- onions: dormant past event
   ('Salmonella — imported red onions',
-   'https://www.fda.gov/safety/recalls/imported-red-onions-salmonella',
-   'FDA', 1, 'FDA warns consumers not to eat imported red onions',
+   'https://recall-notice.example/safety/recalls/imported-red-onions-salmonella',
+   'Federal recall notice', 1, 'FDA warns consumers not to eat imported red onions',
    now() - interval '260 days'),
   ('Salmonella — imported red onions',
-   'https://www.cdc.gov/salmonella/red-onions/index.html',
-   'CDC', 1, 'Salmonella outbreak linked to red onions declared over',
+   'https://health-advisory.example/salmonella/red-onions/index.html',
+   'Federal health advisory', 1, 'Salmonella outbreak linked to red onions declared over',
    now() - interval '220 days')
 ) AS v(outbreak_title, url, source_name, source_tier, headline, published_at)
 JOIN outbreaks o ON o.title = v.outbreak_title;
