@@ -1,0 +1,88 @@
+{
+  "federal": [
+    {
+      "id": "fda-enforcement",
+      "name": "FDA Enforcement Reports",
+      "kind": "fda-enforcement",
+      "tier": 1,
+      "url": "https://api.fda.gov/food/enforcement.json"
+    },
+    {
+      "id": "foodsafety-gov",
+      "name": "FoodSafety.gov Recalls",
+      "kind": "rss",
+      "tier": 1,
+      "url": "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/food-safety/rss.xml"
+    },
+    {
+      "id": "cdc-outbreaks",
+      "name": "CDC Food Safety Alerts",
+      "kind": "rss",
+      "tier": 1,
+      "url": "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
+    }
+  ],
+  "curated": [
+    {
+      "id": "food-safety-news",
+      "name": "Food Safety News",
+      "kind": "rss",
+      "tier": 2,
+      "url": "https://www.foodsafetynews.com/feed/",
+      "domains": ["foodsafetynews.com"]
+    },
+    {
+      "id": "food-poisoning-bulletin",
+      "name": "Food Poisoning Bulletin",
+      "kind": "rss",
+      "tier": 2,
+      "url": "https://foodpoisoningbulletin.com/feed/",
+      "domains": ["foodpoisoningbulletin.com"]
+    },
+    {
+      "id": "cnn-health",
+      "name": "CNN Health",
+      "kind": "rss",
+      "tier": 2,
+      "url": "http://rss.cnn.com/rss/cnn_health.rss",
+      "domains": ["cnn.com"]
+    },
+    {
+      "id": "npr-health",
+      "name": "NPR Health",
+      "kind": "rss",
+      "tier": 2,
+      "url": "https://feeds.npr.org/1128/rss.xml",
+      "domains": ["npr.org"]
+    }
+  ],
+  "googleNewsQueries": [
+    "salmonella outbreak",
+    "e coli outbreak",
+    "listeria recall",
+    "cyclospora",
+    "food recall"
+  ],
+  "trustedDomains": [
+    "fda.gov",
+    "cdc.gov",
+    "usda.gov",
+    "fsis.usda.gov",
+    "foodsafety.gov",
+    "foodsafetynews.com",
+    "foodpoisoningbulletin.com",
+    "apnews.com",
+    "reuters.com",
+    "nytimes.com",
+    "washingtonpost.com",
+    "cnn.com",
+    "nbcnews.com",
+    "cbsnews.com",
+    "abcnews.go.com",
+    "npr.org",
+    "usatoday.com",
+    "wsj.com",
+    "nbcnews.com",
+    "bloomberg.com"
+  ]
+}

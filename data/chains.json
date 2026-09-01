@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "chipotle",
+    "name": "Chipotle",
+    "suppliers": ["Taylor Farms", "FreshPoint"],
+    "key_ingredients": ["romaine-lettuce", "tomatoes", "cilantro", "avocados", "onions"]
+  },
+  {
+    "slug": "mcdonalds",
+    "name": "McDonald's",
+    "suppliers": ["Taylor Farms", "Lopez Foods", "Keystone Foods"],
+    "key_ingredients": ["ground-beef", "onions", "romaine-lettuce", "chicken"]
+  },
+  {
+    "slug": "wendys",
+    "name": "Wendy's",
+    "suppliers": ["Fresh Express", "Taylor Farms"],
+    "key_ingredients": ["romaine-lettuce", "ground-beef", "tomatoes", "onions"]
+  },
+  {
+    "slug": "burger-king",
+    "name": "Burger King",
+    "suppliers": ["Taylor Farms"],
+    "key_ingredients": ["ground-beef", "romaine-lettuce", "tomatoes", "onions"]
+  },
+  {
+    "slug": "taco-bell",
+    "name": "Taco Bell",
+    "suppliers": ["Taylor Farms", "Ready Pac"],
+    "key_ingredients": ["romaine-lettuce", "tomatoes", "onions", "ground-beef"]
+  },
+  {
+    "slug": "subway",
+    "name": "Subway",
+    "suppliers": ["Fresh Express", "Ready Pac"],
+    "key_ingredients": ["deli-meat", "romaine-lettuce", "spinach", "tomatoes", "cucumbers"]
+  },
+  {
+    "slug": "panera",
+    "name": "Panera Bread",
+    "suppliers": ["Taylor Farms", "FreshPoint"],
+    "key_ingredients": ["bagged-salad", "romaine-lettuce", "chicken-salad", "tomatoes"]
+  },
+  {
+    "slug": "sweetgreen",
+    "name": "Sweetgreen",
+    "suppliers": ["Taylor Farms", "Church Brothers"],
+    "key_ingredients": ["romaine-lettuce", "spinach", "bagged-salad", "avocados"]
+  },
+  {
+    "slug": "starbucks",
+    "name": "Starbucks",
+    "suppliers": ["Premier Foods", "Sodexo"],
+    "key_ingredients": ["deli-meat", "eggs", "berries"]
+  },
+  {
+    "slug": "chick-fil-a",
+    "name": "Chick-fil-A",
+    "suppliers": ["Taylor Farms", "Koch Foods"],
+    "key_ingredients": ["chicken", "romaine-lettuce", "bagged-salad"]
+  },
+  {
+    "slug": "kfc",
+    "name": "KFC",
+    "suppliers": ["Koch Foods", "Tyson Foods"],
+    "key_ingredients": ["chicken", "potatoes"]
+  },
+  {
+    "slug": "popeyes",
+    "name": "Popeyes",
+    "suppliers": ["Tyson Foods"],
+    "key_ingredients": ["chicken", "potatoes"]
+  },
+  {
+    "slug": "wingstop",
+    "name": "Wingstop",
+    "suppliers": ["Tyson Foods", "Koch Foods"],
+    "key_ingredients": ["chicken", "potatoes"]
+  },
+  {
+    "slug": "dominos",
+    "name": "Domino's",
+    "suppliers": ["Leprino Foods"],
+    "key_ingredients": ["soft-cheese", "tomatoes", "mushrooms", "onions"]
+  },
+  {
+    "slug": "pizza-hut",
+    "name": "Pizza Hut",
+    "suppliers": ["Leprino Foods"],
+    "key_ingredients": ["soft-cheese", "tomatoes", "mushrooms", "onions"]
+  },
+  {
+    "slug": "olive-garden",
+    "name": "Olive Garden",
+    "suppliers": ["FreshPoint", "Sysco"],
+    "key_ingredients": ["romaine-lettuce", "tomatoes", "shrimp", "soft-cheese"]
+  },
+  {
+    "slug": "applebees",
+    "name": "Applebee's",
+    "suppliers": ["Sysco"],
+    "key_ingredients": ["ground-beef", "chicken", "romaine-lettuce", "shrimp"]
+  },
+  {
+    "slug": "red-lobster",
+    "name": "Red Lobster",
+    "suppliers": ["Sysco"],
+    "key_ingredients": ["shrimp", "scallops", "salmon", "romaine-lettuce"]
+  },
+  {
+    "slug": "jimmy-johns",
+    "name": "Jimmy John's",
+    "suppliers": ["Fresh Express", "Ready Pac"],
+    "key_ingredients": ["deli-meat", "sprouts", "romaine-lettuce", "tomatoes", "cucumbers"]
+  },
+  {
+    "slug": "in-n-out",
+    "name": "In-N-Out",
+    "suppliers": ["Taylor Farms"],
+    "key_ingredients": ["ground-beef", "romaine-lettuce", "tomatoes", "onions"]
+  }
+]
